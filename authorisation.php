@@ -5,19 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Метросервис</title>
+    <link href="styles/styles.css" rel="stylesheet" />
 </head>
 
 <body>
+    <div class="space">
+        <div class="content">
+            <form class="reg_auth_form" action="authorisation.php" method="POST">
 
-    <form action="authorisation.php" method="POST">
+                <label for="login">Логин: <input type="text" id="login" name="login"></label>
+                <label for="password">Пароль: <input type="password" id="password" name="password"></label>
+                <input type="submit" name="submit" id="submit" value="Войти">
+                <a href="register.php">Зарегестрироваться</a>
 
-        <label for="login">Логин: <input type="text" id="login" name="login"></label>
-        <label for="password">Пароль: <input type="password" id="password" name="password"></label>
-        <input type="submit" name="submit" id="submit" value="Войти">
-
-    </form>
-    <a href="register.php">Зарегестрироваться</a>
-
+            </form>
+        </div>
+    </div>
 
     <?php 
 
@@ -43,7 +46,6 @@
     $conn = new mysqli($servername, $username, $password, $dbname);
     $query = mysqli_query(mysql: $conn, query:'SELECT id, password FROM users WHERE login="'.$_POST['login'].'" LIMIT 1');
     $data = mysqli_fetch_assoc($query);
-    echo($data['password'] .'<br>'. md5(md5($_POST['password'])));
     if($data['password'] === md5(md5($_POST['password'])))
     {
     $hash = md5(generateCode(10));

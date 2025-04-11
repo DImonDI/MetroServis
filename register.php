@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>МетроСервис</title>
+    <link href="styles/styles.css" rel="stylesheet" />
 </head>
 <body>
     <?
@@ -31,8 +32,6 @@
 
             $login = $_POST['login'];
             $password = md5(md5(trim($_POST['password'])));
-            echo('INSERT INTO users SET login="'.$login.'", password="'. $password .'", postion="Клиент", email="' . $_POST['e-mail'] . '"');
-
             mysqli_query($conn,query: 'INSERT INTO users SET login="'.$login.'", password="'. $password .'", position="Клиент", email="' . $_POST['e-mail'] . '"');
             mysqli_query($conn,'INSERT INTO client_info SET user_id=(SELECT MAX(id) FROM users), contact_person="'.$_POST['contact_person'].'", tel_num="'.$_POST['tel_num'].'", company_name="'.$_POST['company_name'].'"');
             header("Location: authorisation.php"); exit();
@@ -47,27 +46,30 @@
     }
     ?>
 
-
-        <form method="POST">
-        <label for="login">Логин: 
-            <input name="login" id="login" type="text" required>
-        </label>
-        <label for="password">Пароль: 
-            <input name="password" id="password" type="text" required>
-        </label>
-        <label for="contact_person">Контактное лицо (ФИО): 
-            <input name="contact_person" id="contact_person" type="text" required></label>
-        <label for="tel_num">Телефон: 
-            <input name="tel_num" id="tel_num" type="tel" required>
-        </label>
-        <label for="e-mail">Почта: 
-            <input name="e-mail" id="e-mail" type="text" required>
-        </label>
-        <label for="company_name">Название компании: 
-            <input name="company_name" id="company_name" type="text" required>
-        </label>
-        <input name="submit" type="submit" value="Зарегистрироваться">
-        </form>
-    <a href="authorisation.php">Войти в существующий аккаунт</a>
+    <div class="space">
+        <div class="content">
+            <form class="reg_auth_form" method="POST">
+            <label for="login">Логин: 
+                <input name="login" id="login" type="text" required>
+            </label>
+            <label for="password">Пароль: 
+                <input name="password" id="password" type="text" required>
+            </label>
+            <label for="contact_person">Контактное лицо (ФИО): 
+                <input name="contact_person" id="contact_person" type="text" required></label>
+            <label for="tel_num">Телефон: 
+                <input name="tel_num" id="tel_num" type="tel" required>
+            </label>
+            <label for="e-mail">Почта: 
+                <input name="e-mail" id="e-mail" type="text" required>
+            </label>
+            <label for="company_name">Название компании: 
+                <input name="company_name" id="company_name" type="text" required>
+            </label>
+            <input name="submit" type="submit" value="Зарегистрироваться">
+            <a href="authorisation.php">Войти в существующий аккаунт</a>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

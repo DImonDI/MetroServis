@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>МетроСервис</title>
+    <link href="styles/styles.css" rel="stylesheet" />
 </head>
 <body>
-    <h1>Профиль</h1>
+    <p><b>Профиль</b></p>
     <?php
     
     $link=mysqli_connect("localhost", "root", "mysql", "MetroServis");
@@ -33,6 +34,6 @@
         }
     
     ?>
-    <br><a href="logout.php">Выход</a>
+    <br><br><a href="logout.php">Выход</a>
 </body>
 </html>
