@@ -5,6 +5,26 @@
     text-decoration: none;
 }
 
+.hidden{
+    visibility: hidden;
+    display: none;
+}
+
+.hidden *{
+    visibility: hidden;
+    display: none;
+}
+
+.reg_auth_form > label.hidden{
+    visibility: hidden;
+    display: none;
+}
+
+.reg_auth_form > label.hidden *{
+    visibility: hidden;
+    display: none;
+}
+
 .space{
     width: 100%;
     min-height: 100vh;
@@ -42,7 +62,7 @@ a:hover{
     align-items: center;
 }
 
-.reg_auth_form > label{
+.reg_auth_form label{
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -50,7 +70,7 @@ a:hover{
     user-select: none;
 }
 
-.reg_auth_form > input{
+.reg_auth_form input[type="submit"]{
     width:fit-content;
     padding: 5px;
 }

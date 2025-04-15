@@ -23,7 +23,6 @@
     </div>
 
     <?php 
-
     function generateCode($length=6) {
         $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHI JKLMNOPRQSTUVWXYZ0123456789";
         $code = "";
@@ -53,7 +52,7 @@
     mysqli_query($conn, "UPDATE users SET hash='".$hash."' WHERE id='".$data['id']."'");
     setcookie("id", $data['id'], time()+60*60*24*30, "/");
     setcookie("hash", $hash, time()+60*60*24*30, "/", null, null, true);
-    header("Location: index.php"); exit();
+    header("Location: profile.php"); exit();
 
     }
     else
