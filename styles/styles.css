@@ -1,7 +1,7 @@
 *{
     margin: 0;
     padding: 0;
-    color:black;
+    color:rgb(0, 0, 0);
     text-decoration: none;
 }
 
@@ -28,6 +28,15 @@
 .space{
     width: 100%;
     min-height: 100vh;
+}
+
+
+
+header > *{
+    display: flex;
+    gap: 10px;
+    background-color: #ed1f47;
+    padding:10px;
 }
 
 a{

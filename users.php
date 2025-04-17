@@ -1,32 +1,48 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>МетроСервис</title>
-    <link href="styles/styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="./styles/styles.css">
 </head>
 <body>
-    <header>
+<header>
         <div class="info_part">
 
         </div>
         <nav>
-            <a href="#" class="nav_item">Заказы</a>
+            <a href="orders.php" class="nav_item">Заказы</a>
             <?php
             $link=mysqli_connect('localhost','root','mysql','MetroServis');
             $user_permission = (mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
             if ($user_permission === 'Руководитель'){
                 echo('
                 <a href="aboutUs_options.php" class="nav_item">Настройки</a>
-                <a href="users.php" class="nav_item">Пользователи</a>
+                <a href="admins_user_control.php" class="nav_item">Пользователи</a>
                 ');
             }
             ?>
             <a href="profile.php" class="nav_item">Профиль</a>
         </nav>
     </header>
+    <table>
+    <?php 
 
-    <br><br><a href="logout.php">Выход</a>
+    $link = new mysqli('localhost', 'root','mysql','MetroServis');
+    $sql = "SELECT * FROM Users";
+    if($result = $link->query($sql)){
+        foreach($result as $row){
+             
+            $login = $row["login"];
+            $email = $row["email"];
+            $position = $row["position"];
+            echo("<tr><td>$login</td> <td>$email</td> <td>$position</td><td><button>Редактировать</button></td></tr>");
+        }
+    }
+    ?>
+    </table>
+    <a href="admins_user_control.php">Создать нового пользователя</a>
+
 </body>
 </html>

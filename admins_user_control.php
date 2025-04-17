@@ -54,19 +54,19 @@
         }
     }
     ?>
-    <header>
+<header>
         <div class="info_part">
 
         </div>
         <nav>
-            <a href="#" class="nav_item">О нас</a>
+            <a href="orders.php" class="nav_item">Заказы</a>
             <?php
             $link=mysqli_connect('localhost','root','mysql','MetroServis');
             $user_permission = (mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
             if ($user_permission === 'Руководитель'){
                 echo('
                 <a href="aboutUs_options.php" class="nav_item">Настройки</a>
-                <a href="admins_user_control.php" class="nav_item">Пользователи</a>
+                <a href="users.php" class="nav_item">Пользователи</a>
                 ');
             }
             ?>
@@ -105,6 +105,7 @@
                     <input name="company_name" id="company_name" type="text">
                 </label>
                 <input name="submit" type="submit" value="Зарегистрировать">
+                <a href="users.php">Вернуться</a>
             </form>
         </div>
     </div>
