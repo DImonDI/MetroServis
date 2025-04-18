@@ -83,3 +83,17 @@ a:hover{
     width:fit-content;
     padding: 5px;
 }
+
+td{
+    border: black, solid, 1px ;
+    padding: 5px;
+}
+
+.adress_container{
+    display: flex;
+}
+
+.adress_string{
+    display: flex;
+    flex-direction: column;
+}

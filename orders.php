@@ -26,21 +26,32 @@
             <a href="profile.php" class="nav_item">Профиль</a>
         </nav>
     </header>
-    <table>
-    <?php 
-
-    // $link = new mysqli('localhost', 'root','mysql','MetroServis');
-    // $sql = "SELECT * FROM orders";
-    // if($result = $link->query($sql)){
-    //     foreach($result as $row){
-             
-    //         $login = $row["login"];
-    //         $email = $row["email"];
-    //         $position = $row["position"];
-    //         echo("<tr><td>$login</td> <td>$email</td> <td>$position</td><td><button>Редактировать</button></td></tr>");
-    //     }
-    // }
-    ?>
+    <table class="orders" cellspacing="0">
+        <?php
+        
+            $link = mysqli_connect('localhost', 'root', 'mysql', 'Metroservis');
+            $sql = 'SELECT * FROM orders';
+            
+            echo("<tr>
+                    <td>№Заказа</td>
+                    <td>Дата</td>
+                    <td>Статус</td>
+                    <td></td>
+                    </tr>");
+            if ($result = $link->query($sql)){
+                foreach ($result as $row){
+                    echo("<tr>
+                    <td>".$row['id']."</td>
+                    <td>".date('d-m-Y', strtotime($row['date']))."</td>
+                    <td>".$row['status']."</td>
+                    <td><form action=\"order_card.php\" method=\"POST\">
+                    <input name=\"selected_order\" id=\"selected_order\" type=\"hidden\" value=\"".$row['id']."\">
+                    <input type=\"submit\" value=\"Посмотреть\">
+                    </form></td>
+                    </tr>");
+                }
+            }
+        ?>
     </table>
     
 </body>

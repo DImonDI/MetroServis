@@ -38,7 +38,7 @@
 
     <div class="space">
         <div class="content">
-            <form class="reg_auth_form" action="">
+            <form id="thatForm" class="reg_auth_form" action="aboutUs_update.php" method="POST">
                 <label for="fname">Полное название организации: 
                     <input id="fname" name="fname" type="text">
                 </label>
@@ -46,7 +46,17 @@
                     <input id="sname" name="sname" type="text">
                 </label>
                 <label for="adress">Адресса:
-                    <input id="adress" name="adress" type="text"> <button>+</button>
+                    <input name="action" id="action" type="hidden" value="Save">
+                    <div class="adress_container">
+                        <button id="add">+</button> 
+                        <div class="adress_string">
+                            <input id="adress<?php echo(mysqli_fetch_assoc(mysqli_query($conn, 'SELECT MIN(id) FROM adres LIMIT 1')));?>" name="adress" type="text"><?php
+                    
+                    foreach($conn->query('SELECT * FROM adres WHERE id > (SELECT MIN(id) FROM adres LIMIT 1)') as $row){
+                        echo('<div><input id="adress'.$row['id'].'" name="adress" type="text" value="'.$row['adres'].'"><button id="del">-</button></div>');
+                    }
+                    
+                    ?></div></div>
                 </label>
                 <label for="accreditation_certificate">Аттестат акредитации:
                     <input id="accr_cert" name="accreditation_certificate" type="text">
@@ -68,6 +78,19 @@
             that.value = that.value.replace(res, '');
         }, 0);
     });
+    function submitFuncbtns(){
+        document.getElementById('thatForm').submit();
+    }
+    function addAdress(){
+        const action = document.getElementById('action');
+        action.value = 'add';
+        submitFuncbtns();
+    }
+    function delAdress(){
+        const action = document.getElementById('action');
+        action.value = 'del';
+        submitFuncbtns();
+    }
     </script>
 
 </body>
