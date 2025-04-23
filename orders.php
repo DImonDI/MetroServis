@@ -14,8 +14,8 @@
         <nav>
             <a href="orders.php" class="nav_item">Заказы</a>
             <?php
-            $link=mysqli_connect('localhost','root','mysql','MetroServis');
-            $user_permission = (mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
+            $conn=mysqli_connect('localhost','root','mysql','MetroServis');
+            $user_permission = (mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
             if ($user_permission === 'Руководитель'){
                 echo('
                 <a href="aboutUs_options.php" class="nav_item">Настройки</a>
@@ -28,17 +28,13 @@
     </header>
     <table class="orders" cellspacing="0">
         <?php
-        
-            $link = mysqli_connect('localhost', 'root', 'mysql', 'Metroservis');
-            $sql = 'SELECT * FROM orders';
-            
             echo("<tr>
                     <td>№Заказа</td>
                     <td>Дата</td>
                     <td>Статус</td>
                     <td></td>
                     </tr>");
-            if ($result = $link->query($sql)){
+            if ($result = $conn->query('SELECT * FROM orders')){
                 foreach ($result as $row){
                     echo("<tr>
                     <td>".$row['id']."</td>

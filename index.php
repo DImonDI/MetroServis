@@ -14,8 +14,8 @@
         <nav>
             <a href="#" class="nav_item">Заказы</a>
             <?php
-            $link=mysqli_connect('localhost','root','mysql','MetroServis');
-            $user_permission = (mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
+            $conn=mysqli_connect('localhost','root','mysql','MetroServis');
+            $user_permission = (mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
             if ($user_permission === 'Руководитель'){
                 echo('
                 <a href="aboutUs_options.php" class="nav_item">Настройки</a>

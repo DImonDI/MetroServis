@@ -14,8 +14,8 @@
         <nav>
             <a href="orders.php" class="nav_item">Заказы</a>
             <?php
-            $link=mysqli_connect('localhost','root','mysql','MetroServis');
-            $user_permission = (mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
+            $conn=mysqli_connect('localhost','root','mysql','MetroServis');
+            $user_permission = (mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
             if ($user_permission === 'Руководитель'){
                 echo('
                 <a href="aboutUs_options.php" class="nav_item">Настройки</a>
@@ -29,17 +29,17 @@
     <p><b>Профиль</b></p>
     <?php
     
-    $link=mysqli_connect("localhost", "root", "mysql", "MetroServis");
+    $conn=mysqli_connect("localhost", "root", "mysql", "MetroServis");
 
         if (isset($_COOKIE['id']) and isset($_COOKIE['hash']))
         {
-            $query = mysqli_query($link, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1");
+            $query = mysqli_query($conn, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1");
             $userdata = mysqli_fetch_assoc($query);
 
             if(($userdata['hash'] !== $_COOKIE['hash']) or ($userdata['id'] !== $_COOKIE['id']))
             {
                 setcookie("id", "", time() - 3600*24*30*12, "/");
-                setcookie("hash", "", time() - 3600*24*30*12, "/", null, null, true); // httponly !!!
+                setcookie("hash", "", time() - 3600*24*30*12, "/", null, false, true); // httponly !!!
                 print "Хм, что-то не получилось";
             }
             else

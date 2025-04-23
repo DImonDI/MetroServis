@@ -51,7 +51,7 @@
 
     mysqli_query($conn, "UPDATE users SET hash='".$hash."' WHERE id='".$data['id']."'");
     setcookie("id", $data['id'], time()+60*60*24*30, "/");
-    setcookie("hash", $hash, time()+60*60*24*30, "/", null, null, true);
+    setcookie("hash", $hash, time()+60*60*24*30, "/", null, false, true);
     header("Location: profile.php"); exit();
 
     }

@@ -14,8 +14,8 @@
         <nav>
             <a href="orders.php" class="nav_item">Заказы</a>
             <?php
-            $link=mysqli_connect('localhost','root','mysql','MetroServis');
-            $user_permission = (mysqli_fetch_assoc(mysqli_query($link, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
+            $conn=mysqli_connect('localhost','root','mysql','MetroServis');
+            $user_permission = (mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id = \"".intval($_COOKIE['id'])."\" LIMIT 1")))['position'];
             if ($user_permission === 'Руководитель'){
                 echo('
                 <a href="aboutUs_options.php" class="nav_item">Настройки</a>
@@ -29,9 +29,9 @@
     <table cellspacing="0">
     <?php 
 
-    $link = new mysqli('localhost', 'root','mysql','MetroServis');
+    $conn = new mysqli('localhost', 'root','mysql','MetroServis');
     $sql = "SELECT * FROM Users";
-    if($result = $link->query($sql))
+    if($result = $conn->query($sql))
     echo("<tr>
             <td>Логин</td> 
             <td>Почта</td> 
@@ -48,7 +48,7 @@
             $position = $row["position"];
             $snils = ($position != 'Клиент') ? $row['SNILS'] : '—';
             $id = $row['id'];
-            $client_info = mysqli_fetch_assoc(mysqli_query($link,'SELECT * FROM client_info WHERE user_id="'.$id.'"'));
+            $client_info = mysqli_fetch_assoc(mysqli_query($conn,'SELECT * FROM client_info WHERE user_id="'.$id.'"'));
             $contact_person = isset($client_info) ? $client_info['contact_person'] : '—' ;
             $tel_num = isset($client_info) ? $client_info['tel_num'] : '—' ;
             $company_name = isset($client_info) ? $client_info['company_name'] : '—' ;
